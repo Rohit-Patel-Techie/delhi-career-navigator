@@ -21,13 +21,13 @@ Choosing the right career is difficult due to:
 ## 🖼️ UI Preview
 
 ### 🏠 Homepage
-![Homepage UI](\frontend\src\assets\image-01.png)
+![Homepage UI](frontend/src/assets/image-01.png)
 
 ### 📝 Career Input Form
-![Form UI](\frontend\src\assets\image-02.png)
+![Form UI](frontend/src/assets/image-02.png)
 
 ### 📊 Career Recommendations Pages
-![Dashboard UI](\frontend\src\assets\image-03.png)
+![Dashboard UI](frontend/src/assets/image-03.png)
 
 > 📌 *Images show the actual UI flow: homepage → input form → AI recommendations.*
 
