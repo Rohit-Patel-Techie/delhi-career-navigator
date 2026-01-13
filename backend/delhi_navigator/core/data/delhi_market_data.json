@@ -1,0 +1,436 @@
+{
+    "delhi_market_overview": {
+        "description": "Delhi NCR is one of India's largest job markets with diverse opportunities in IT, Finance, Healthcare, Government, and Startups.",
+        "top_industries": [
+            "Information Technology",
+            "Finance & Banking",
+            "Healthcare",
+            "Government & PSUs",
+            "E-commerce",
+            "Education",
+            "Manufacturing",
+            "Media & Entertainment"
+        ]
+    },
+    "career_pathways": [
+        {
+            "id": 1,
+            "name": "Software Developer / Full Stack Developer",
+            "category": "Information Technology",
+            "description": "Design, develop, and maintain software applications using modern technologies",
+            "required_skills": [
+                "Programming (Python/JavaScript/Java)",
+                "Web Development",
+                "Database Management",
+                "API Development",
+                "Version Control (Git)"
+            ],
+            "preferred_courses": [
+                "B.Tech CS/IT",
+                "BCA",
+                "MCA",
+                "Any degree with coding skills"
+            ],
+            "salary_range": "₹4-15 LPA (Entry) | ₹15-35 LPA (Mid) | ₹35-80 LPA (Senior)",
+            "demand_level": "Very High",
+            "growth_prospects": "Excellent - Delhi NCR has 50,000+ IT companies including Google, Microsoft, Amazon offices",
+            "certifications": [
+                "AWS Certified",
+                "Google Cloud",
+                "Meta Developer Certification"
+            ],
+            "time_to_job_ready": "3-6 months with focused learning"
+        },
+        {
+            "id": 2,
+            "name": "Data Scientist / ML Engineer",
+            "category": "Information Technology",
+            "description": "Analyze complex data sets and build machine learning models to drive business decisions",
+            "required_skills": [
+                "Python",
+                "Machine Learning",
+                "Statistics",
+                "SQL",
+                "Data Visualization",
+                "Deep Learning"
+            ],
+            "preferred_courses": [
+                "B.Tech/M.Tech",
+                "Statistics",
+                "Mathematics",
+                "Computer Science"
+            ],
+            "salary_range": "₹6-18 LPA (Entry) | ₹18-40 LPA (Mid) | ₹40-1 Cr (Senior)",
+            "demand_level": "Very High",
+            "growth_prospects": "Exceptional - AI/ML is the fastest growing field in Delhi NCR tech sector",
+            "certifications": [
+                "Google ML Certificate",
+                "IBM Data Science",
+                "Coursera/edX certifications"
+            ],
+            "time_to_job_ready": "6-12 months with focused learning"
+        },
+        {
+            "id": 3,
+            "name": "Digital Marketing Specialist",
+            "category": "Marketing",
+            "description": "Plan and execute digital marketing campaigns across various online platforms",
+            "required_skills": [
+                "SEO/SEM",
+                "Social Media Marketing",
+                "Content Marketing",
+                "Google Ads",
+                "Analytics",
+                "Email Marketing"
+            ],
+            "preferred_courses": [
+                "Any Graduate",
+                "MBA Marketing",
+                "Mass Communication"
+            ],
+            "salary_range": "₹3-8 LPA (Entry) | ₹8-20 LPA (Mid) | ₹20-40 LPA (Senior)",
+            "demand_level": "High",
+            "growth_prospects": "Very Good - Every business needs digital presence, especially post-pandemic",
+            "certifications": [
+                "Google Ads Certification",
+                "HubSpot Certification",
+                "Facebook Blueprint"
+            ],
+            "time_to_job_ready": "2-4 months with focused learning"
+        },
+        {
+            "id": 4,
+            "name": "Government Job (UPSC/SSC/State PCS)",
+            "category": "Government",
+            "description": "Secure positions in Indian Administrative Services, Central/State Government departments",
+            "required_skills": [
+                "General Knowledge",
+                "Current Affairs",
+                "Reasoning",
+                "English/Hindi Language",
+                "Subject Expertise"
+            ],
+            "preferred_courses": [
+                "Any Graduate",
+                "Humanities preferred for UPSC"
+            ],
+            "salary_range": "₹5-18 LPA (Entry) | ₹18-35 LPA (Mid) | ₹35-60 LPA (Senior + perks)",
+            "demand_level": "Very High Competition",
+            "growth_prospects": "Stable career with job security, pension, and social respect",
+            "certifications": [
+                "No specific certifications required"
+            ],
+            "time_to_job_ready": "1-3 years of dedicated preparation"
+        },
+        {
+            "id": 5,
+            "name": "Financial Analyst / Investment Banker",
+            "category": "Finance & Banking",
+            "description": "Analyze financial data, create reports, and provide investment recommendations",
+            "required_skills": [
+                "Financial Modeling",
+                "Excel Advanced",
+                "Valuation",
+                "Accounting",
+                "Data Analysis"
+            ],
+            "preferred_courses": [
+                "B.Com",
+                "MBA Finance",
+                "CA",
+                "CFA"
+            ],
+            "salary_range": "₹5-12 LPA (Entry) | ₹12-30 LPA (Mid) | ₹30-1 Cr (Senior)",
+            "demand_level": "High",
+            "growth_prospects": "Excellent - Gurgaon is India's finance hub with all major banks/firms",
+            "certifications": [
+                "CFA",
+                "FRM",
+                "CA",
+                "CPA"
+            ],
+            "time_to_job_ready": "6-12 months (with relevant degree)"
+        },
+        {
+            "id": 6,
+            "name": "UI/UX Designer",
+            "category": "Design",
+            "description": "Create user-friendly interfaces and experiences for websites and mobile apps",
+            "required_skills": [
+                "Figma/Sketch",
+                "User Research",
+                "Wireframing",
+                "Prototyping",
+                "Visual Design",
+                "Design Thinking"
+            ],
+            "preferred_courses": [
+                "Design Degree",
+                "Any Graduate with portfolio"
+            ],
+            "salary_range": "₹4-10 LPA (Entry) | ₹10-25 LPA (Mid) | ₹25-50 LPA (Senior)",
+            "demand_level": "High",
+            "growth_prospects": "Very Good - Rising demand with growing startup ecosystem",
+            "certifications": [
+                "Google UX Design Certificate",
+                "Coursera UI/UX"
+            ],
+            "time_to_job_ready": "3-6 months with portfolio building"
+        },
+        {
+            "id": 7,
+            "name": "Healthcare Professional (Nursing/Pharmacy/Lab Tech)",
+            "category": "Healthcare",
+            "description": "Provide medical care and support in hospitals, clinics, and healthcare facilities",
+            "required_skills": [
+                "Clinical Skills",
+                "Patient Care",
+                "Medical Knowledge",
+                "Communication",
+                "Empathy"
+            ],
+            "preferred_courses": [
+                "B.Sc Nursing",
+                "B.Pharma",
+                "DMLT",
+                "GNM"
+            ],
+            "salary_range": "₹3-8 LPA (Entry) | ₹8-20 LPA (Mid) | ₹20-40 LPA (Senior)",
+            "demand_level": "Very High",
+            "growth_prospects": "Excellent - Delhi has AIIMS, Fortis, Max, Apollo and 1000+ hospitals",
+            "certifications": [
+                "Relevant degree/diploma mandatory"
+            ],
+            "time_to_job_ready": "Degree completion + 6 months internship"
+        },
+        {
+            "id": 8,
+            "name": "Content Writer / Copywriter",
+            "category": "Media & Content",
+            "description": "Create engaging content for websites, social media, and marketing materials",
+            "required_skills": [
+                "Writing Skills",
+                "SEO Knowledge",
+                "Research",
+                "Creativity",
+                "Grammar"
+            ],
+            "preferred_courses": [
+                "Mass Communication",
+                "English Literature",
+                "Journalism",
+                "Any Graduate"
+            ],
+            "salary_range": "₹2.5-6 LPA (Entry) | ₹6-15 LPA (Mid) | ₹15-30 LPA (Senior)",
+            "demand_level": "High",
+            "growth_prospects": "Good - Content demand increasing with digital transformation",
+            "certifications": [
+                "HubSpot Content Marketing",
+                "Google Digital Garage"
+            ],
+            "time_to_job_ready": "1-3 months with portfolio"
+        },
+        {
+            "id": 9,
+            "name": "Sales & Business Development",
+            "category": "Sales",
+            "description": "Generate revenue by acquiring new clients and managing customer relationships",
+            "required_skills": [
+                "Communication",
+                "Negotiation",
+                "CRM Tools",
+                "Market Research",
+                "Networking"
+            ],
+            "preferred_courses": [
+                "Any Graduate",
+                "MBA preferred"
+            ],
+            "salary_range": "₹3-8 LPA (Entry) | ₹8-25 LPA (Mid) | ₹25-60 LPA (Senior)",
+            "demand_level": "Very High",
+            "growth_prospects": "Always in demand - Every company needs sales professionals",
+            "certifications": [
+                "Salesforce Certification",
+                "HubSpot Sales"
+            ],
+            "time_to_job_ready": "Immediate with right attitude and training"
+        },
+        {
+            "id": 10,
+            "name": "DevOps / Cloud Engineer",
+            "category": "Information Technology",
+            "description": "Manage cloud infrastructure, CI/CD pipelines, and ensure system reliability",
+            "required_skills": [
+                "AWS/Azure/GCP",
+                "Docker",
+                "Kubernetes",
+                "Linux",
+                "CI/CD",
+                "Scripting"
+            ],
+            "preferred_courses": [
+                "B.Tech CS/IT",
+                "Any tech background"
+            ],
+            "salary_range": "₹6-15 LPA (Entry) | ₹15-35 LPA (Mid) | ₹35-70 LPA (Senior)",
+            "demand_level": "Very High",
+            "growth_prospects": "Excellent - Cloud adoption is accelerating across all industries",
+            "certifications": [
+                "AWS Solutions Architect",
+                "Azure Administrator",
+                "CKA"
+            ],
+            "time_to_job_ready": "4-8 months with focused learning"
+        },
+        {
+            "id": 11,
+            "name": "Teacher / Education Consultant",
+            "category": "Education",
+            "description": "Teach students and provide educational guidance in schools, coaching centers, or EdTech",
+            "required_skills": [
+                "Subject Expertise",
+                "Communication",
+                "Patience",
+                "Classroom Management",
+                "EdTech Tools"
+            ],
+            "preferred_courses": [
+                "B.Ed",
+                "M.Ed",
+                "Subject Master's degree"
+            ],
+            "salary_range": "₹3-8 LPA (Entry) | ₹8-18 LPA (Mid) | ₹18-35 LPA (Senior)",
+            "demand_level": "High",
+            "growth_prospects": "Stable - Education sector is evergreen, EdTech is booming",
+            "certifications": [
+                "B.Ed/M.Ed mandatory for schools",
+                "CTET/STET"
+            ],
+            "time_to_job_ready": "Immediate if qualified, else 1-2 years for B.Ed"
+        },
+        {
+            "id": 12,
+            "name": "Chartered Accountant (CA)",
+            "category": "Finance & Accounting",
+            "description": "Handle accounting, auditing, taxation, and financial advisory for businesses",
+            "required_skills": [
+                "Accounting",
+                "Taxation",
+                "Auditing",
+                "Financial Reporting",
+                "GST/Income Tax"
+            ],
+            "preferred_courses": [
+                "CA Foundation after 12th",
+                "B.Com + CA"
+            ],
+            "salary_range": "₹7-15 LPA (Entry) | ₹15-35 LPA (Mid) | ₹35-1 Cr (Senior/Partner)",
+            "demand_level": "High",
+            "growth_prospects": "Excellent - CAs are always in demand for compliance and advisory",
+            "certifications": [
+                "CA designation from ICAI"
+            ],
+            "time_to_job_ready": "3-5 years to complete CA"
+        },
+        {
+            "id": 13,
+            "name": "Product Manager",
+            "category": "Technology & Business",
+            "description": "Lead product development from ideation to launch, bridging business and technology",
+            "required_skills": [
+                "Product Strategy",
+                "User Research",
+                "Data Analysis",
+                "Communication",
+                "Technical Understanding"
+            ],
+            "preferred_courses": [
+                "B.Tech/MBA",
+                "Any degree with relevant experience"
+            ],
+            "salary_range": "₹12-25 LPA (Entry) | ₹25-50 LPA (Mid) | ₹50-1.5 Cr (Senior)",
+            "demand_level": "High",
+            "growth_prospects": "Exceptional - Startups and tech companies actively hiring PMs",
+            "certifications": [
+                "Google PM Certificate",
+                "Product School certification"
+            ],
+            "time_to_job_ready": "Requires 2-3 years of prior experience in related role"
+        },
+        {
+            "id": 14,
+            "name": "Graphic Designer / Video Editor",
+            "category": "Creative & Design",
+            "description": "Create visual content including graphics, videos, and multimedia for brands",
+            "required_skills": [
+                "Adobe Photoshop",
+                "Illustrator",
+                "Premiere Pro",
+                "After Effects",
+                "Canva"
+            ],
+            "preferred_courses": [
+                "Design Degree",
+                "Animation Course",
+                "Self-taught with portfolio"
+            ],
+            "salary_range": "₹3-8 LPA (Entry) | ₹8-18 LPA (Mid) | ₹18-35 LPA (Senior)",
+            "demand_level": "High",
+            "growth_prospects": "Good - Visual content demand is at all-time high",
+            "certifications": [
+                "Adobe Certified Professional"
+            ],
+            "time_to_job_ready": "3-6 months with strong portfolio"
+        },
+        {
+            "id": 15,
+            "name": "HR Manager / Recruiter",
+            "category": "Human Resources",
+            "description": "Manage hiring, employee relations, and organizational development",
+            "required_skills": [
+                "Communication",
+                "Interviewing",
+                "HRIS Tools",
+                "Labor Laws",
+                "Conflict Resolution"
+            ],
+            "preferred_courses": [
+                "MBA HR",
+                "Any Graduate",
+                "Psychology"
+            ],
+            "salary_range": "₹3-8 LPA (Entry) | ₹8-20 LPA (Mid) | ₹20-45 LPA (Senior)",
+            "demand_level": "Moderate to High",
+            "growth_prospects": "Stable - Every organization needs HR professionals",
+            "certifications": [
+                "SHRM",
+                "HRCI",
+                "LinkedIn Recruiter"
+            ],
+            "time_to_job_ready": "Immediate with MBA HR, else 3-6 months training"
+        }
+    ],
+    "delhi_specific_tips": {
+        "best_locations_for_jobs": [
+            "Gurgaon (Finance/IT)",
+            "Noida (IT/Startups)",
+            "Connaught Place (Corporate)",
+            "Aerocity (MNCs)",
+            "Okhla (Manufacturing)"
+        ],
+        "networking_events": [
+            "Delhi Startup Week",
+            "NASSCOM events",
+            "IIT Delhi events",
+            "Delhi HR Summit"
+        ],
+        "job_portals": [
+            "Naukri.com",
+            "LinkedIn",
+            "Indeed",
+            "Internshala",
+            "AngelList (startups)"
+        ],
+        "salary_negotiation_tips": "Delhi NCR salaries are 20-30% higher than tier-2 cities. Always negotiate based on market research."
+    }
+}
