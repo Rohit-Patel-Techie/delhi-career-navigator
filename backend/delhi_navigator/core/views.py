@@ -121,12 +121,80 @@ class CareerRecommendationView(APIView):
 
 @api_view(['GET'])
 def health_check(request):
-    """Simple health check endpoint"""
-    return Response({
-        "status": "healthy",
-        "service": "Delhi Career Navigator API",
-        "version": "1.0.0"
-    })
+    """
+    Enhanced health check endpoint showing AI provider status.
+    
+    GET /api/health/
+    
+    Returns:
+        - status: "healthy" or "degraded"
+        - provider: active AI provider (ollama/gemini/mock)
+        - model: specific model being used
+        - ollama_status: connection status if using Ollama
+    """
+    from django.conf import settings
+    import os
+    
+    # Check if mock mode is enabled
+    use_mock = os.getenv('USE_MOCK_AI', 'false').lower() == 'true'
+    
+    if use_mock:
+        return Response({
+            "status": "healthy",
+            "service": "Delhi Career Navigator API",
+            "version": "1.0.0",
+            "ai_provider": "mock",
+            "ai_model": "mock-fallback",
+            "mode": "demo/testing"
+        })
+    
+    # Get provider from settings
+    ai_provider = getattr(settings, 'AI_PROVIDER', 'gemini').lower()
+    
+    if ai_provider == 'ollama':
+        ollama_url = getattr(settings, 'OLLAMA_BASE_URL', 'http://localhost:11434')
+        ollama_model = getattr(settings, 'OLLAMA_MODEL', 'mistral')
+        
+        # Check Ollama connectivity
+        try:
+            import requests
+            response = requests.get(f"{ollama_url}/api/tags", timeout=5)
+            if response.status_code == 200:
+                ollama_status = "connected"
+                # Check if model is available
+                models = response.json().get('models', [])
+                model_names = [m.get('name', '') for m in models]
+                model_available = ollama_model in model_names or any(ollama_model in m for m in model_names)
+            else:
+                ollama_status = "error"
+                model_available = False
+        except:
+            ollama_status = "unreachable"
+            model_available = False
+        
+        return Response({
+            "status": "healthy" if ollama_status == "connected" else "degraded",
+            "service": "Delhi Career Navigator API",
+            "version": "1.0.0",
+            "ai_provider": "ollama",
+            "ai_model": ollama_model,
+            "ollama_url": ollama_url,
+            "ollama_status": ollama_status,
+            "model_available": model_available
+        })
+    
+    else:  # Gemini
+        api_key = getattr(settings, 'GEMINI_API_KEY', None)
+        has_key = bool(api_key and len(api_key) > 10)
+        
+        return Response({
+            "status": "healthy" if has_key else "degraded",
+            "service": "Delhi Career Navigator API",
+            "version": "1.0.0",
+            "ai_provider": "gemini",
+            "ai_model": "gemini-2.5-flash",
+            "api_key_configured": has_key
+        })
 
 
 @api_view(['GET', 'POST'])

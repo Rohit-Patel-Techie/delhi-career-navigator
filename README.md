@@ -1,110 +1,100 @@
-# 🎯 Delhi Career Navigator
+# Delhi Career Navigator - Backend Setup
 
-An **AI-powered career guidance platform** that helps **Delhi & NCR students** discover the most suitable career paths based on their skills, interests, constraints, and local job-market demand.
+This guide explains how to run the backend, configure the AI model (Ollama or Gemini), and use mock mode for testing.
 
-Built for **Delhi AI Grind Hackathon 2026 🚀**
+## Prerequisites
 
----
+- Python 3.8+
+- [Ollama](https://ollama.com/) (installed and running)
+- `pip` (Python package manager)
 
-## 🌐 Project Overview
+## 1. Setup & Installation
 
-Choosing the right career is difficult due to:
-- Limited access to quality guidance
-- Confusion between multiple career options
-- Budget, time, and skill constraints
-- Lack of local (Delhi-specific) job awareness
+1.  **Navigate to the backend directory:**
+    ```bash
+    cd backend/delhi_navigator
+    ```
 
-**Delhi Career Navigator** solves this problem using AI-driven insights combined with **Delhi NCR job market data** to provide **realistic, personalized career pathways**.
+2.  **Install Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
----
+3.  **Run Migrations (if needed):**
+    ```bash
+    python manage.py migrate
+    ```
 
-## 🖼️ UI Preview
+## 2. Running the Application
 
-### 🏠 Homepage
-![Homepage UI](frontend/src/assets/image-01.png)
+1.  **Start Ollama (if using local AI):**
+    Open a terminal and run:
+    ```bash
+    ollama serve
+    ```
+    Make sure you have pulled a model (e.g., `ollama pull mistral-nemo`).
 
-### 📝 Career Input Form
-![Form UI](frontend/src/assets/image-02.png)
+2.  **Start the Django Server:**
+    ```bash
+    python manage.py runserver
+    ```
+    The server will start at `http://127.0.0.1:8000/`.
 
-### 📊 Career Recommendations Pages
-![Dashboard UI](frontend/src/assets/image-03.png)
+## 3. Configuration (Changing Models & Providers)
 
-> 📌 *Images show the actual UI flow: homepage → input form → AI recommendations.*
+All configurations are managed via the `.env` file located in `backend/delhi_navigator/.env`.
 
----
+### A. Using Ollama (Local AI - Free)
 
-## 🧠 How It Works
+To use a local Ollama model (recommended to save API quota):
 
-1. User fills a short career assessment form
-2. Inputs include skills, stream, availability, budget & preferences
-3. Backend AI engine analyzes the profile
-4. Career paths are matched with **Delhi NCR demand**
-5. Top 3 career pathways are generated
-6. Each career includes:
-   - Why it fits the user
-   - Effort & trade-offs
-   - Local relevance
-   - 30-day action plan
+1.  Open `.env`.
+2.  Set `AI_PROVIDER` to `ollama`.
+3.  Set `OLLAMA_MODEL` to your desired model tag (check available models with `ollama list`).
 
----
+**Example `.env`:**
+```ini
+AI_PROVIDER=ollama
+OLLAMA_MODEL=mistral-nemo:latest
+# OLLAMA_MODEL=llama3:latest  <-- To switch to Llama 3
+# OLLAMA_MODEL=mistral:latest <-- To switch to standard Mistral
+```
 
-## ✨ Key Features
+### B. Using Google Gemini (Cloud AI)
 
-- 🤖 AI-powered career recommendations
-- 🏙️ Delhi & NCR context-aware analysis
-- 📋 Skill, time & budget-based matching
-- ⭐ Primary + backup career options
-- 📅 Actionable 30-day starter plan
-- 🌐 Language-ready (English / Hindi)
-- 🎨 Clean, student-friendly UI
+To use Google's Gemini API:
 
----
+1.  Open `.env`.
+2.  Set `AI_PROVIDER` to `gemini`.
+3.  Ensure `GEMINI_API_KEY` is set.
 
-## 🧩 Example Career Output
+**Example `.env`:**
+```ini
+AI_PROVIDER=gemini
+GEMINI_API_KEY=your_api_key_here
+```
 
-Each recommendation includes:
+## 4. Using Mock Mode (Testing)
 
-- **Career Title** (Primary / Backup)
-- **Match value**
-- **Expected Salary (Delhi NCR)**
-- **Job Locations**
-- **Why it fits the user**
-- **Delhi-specific opportunities**
+Mock mode returns static/pre-defined data without calling any AI model. This is useful for UI testing or when you don't have internet/Ollama access.
 
----
+1.  Open `.env`.
+2.  Set `USE_MOCK_AI` to `true`.
 
-## 🛠️ Tech Stack
+**Example `.env`:**
+```ini
+USE_MOCK_AI=true
+```
 
-### Frontend
-- React (Vite)
-- TypeScript
-- Tailwind CSS
-- Component-based UI
+**Note:** When `USE_MOCK_AI` is true, the `AI_PROVIDER` setting is ignored.
 
-### Backend
-- Django
-- Django REST Framework
-- AI logic module (LLM-based, Rules Based AI)
-- Delhi job-market dataset (JSON)
----
+## Summary of Config Options
 
-## 🚀 Getting Started
-
-### Clone the Repository
-```bash
-git clone https://github.com/Rohit-Patel-Techie/delhi-career-navigator.git
-cd delhi-career-navigator
-
-### Frontend Setup
-- cd frontend
-- npm install
-- npm run dev
-
-### Backend Setup
-- cd backend
-- python -m venv venv
-- source venv/bin/activate      # Windows: venv\Scripts\activate
-- pip install -r requirements.txt
-- python manage.py runserver
-
-- This project is developed for educational and hackathon purposes only.
+| Setting | Value | Description |
+| :--- | :--- | :--- |
+| `AI_PROVIDER` | `ollama` | Uses local Ollama instance (requires `requests`). |
+| | `gemini` | Uses Google Gemini API (requires `google-genai`). |
+| `OLLAMA_MODEL` | `model_name` | Specific model to use (e.g., `mistral`, `llama3`). |
+| `OLLAMA_BASE_URL`| `url` | URL for Ollama (default: `http://localhost:11434`). |
+| `USE_MOCK_AI` | `true` | returns fake data (no AI call). |
+| | `false` | Uses the configured `AI_PROVIDER`. |

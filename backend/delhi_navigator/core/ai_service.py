@@ -6,14 +6,26 @@ Uses Google Gemini API with Delhi market data to suggest top 3 career pathways
 import json
 import os
 import re
+import time
+import logging
+import hashlib
 from pathlib import Path
 from django.conf import settings
+
+# Setup logger
+logger = logging.getLogger(__name__)
 
 try:
     from google import genai
     GEMINI_AVAILABLE = True
 except ImportError:
     GEMINI_AVAILABLE = False
+
+try:
+    import requests
+    REQUESTS_AVAILABLE = True
+except ImportError:
+    REQUESTS_AVAILABLE = False
 
 
 def load_delhi_market_data():
@@ -237,24 +249,131 @@ def _get_cache_key(user_input: dict) -> str:
     return hashlib.md5(key_data.encode()).hexdigest()
 
 
+def get_ollama_recommendations(user_input: dict, prompt: str, max_retries: int = 3) -> dict:
+    """
+    Get recommendations from Ollama API with automatic retry logic.
+    
+    Args:
+        user_input: User input data
+        prompt: The prompt to send to Ollama
+        max_retries: Maximum number of retry attempts (default: 3)
+    """
+    if not REQUESTS_AVAILABLE:
+        return {
+            "error": "Dependency missing",
+            "message": "The 'requests' library is required for Ollama integration."
+        }
+        
+    base_url = getattr(settings, 'OLLAMA_BASE_URL', 'http://localhost:11434')
+    model = getattr(settings, 'OLLAMA_MODEL', 'mistral')
+    
+    payload = {
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "format": "json"
+    }
+    
+    last_error = None
+    
+    for attempt in range(1, max_retries + 1):
+        try:
+            logger.info(f"🔄 Ollama attempt {attempt}/{max_retries}")
+            
+            response = requests.post(f"{base_url}/api/generate", json=payload, timeout=300)
+            
+            if response.status_code != 200:
+                last_error = {
+                    "error": "Ollama API error",
+                    "message": f"Ollama returned status {response.status_code}: {response.text}"
+                }
+                logger.warning(f"⚠️ Attempt {attempt} failed: HTTP {response.status_code}")
+                if attempt < max_retries:
+                    wait_time = attempt * 5  # 5s, 10s, 15s
+                    logger.info(f"⏳ Waiting {wait_time}s before retry...")
+                    time.sleep(wait_time)
+                continue
+                
+            result = response.json()
+            response_text = result.get('response', '')
+            
+            # Parse and validate
+            parsed_result = parse_ai_response(response_text)
+            is_valid, validation_errors = validate_ai_response(parsed_result)
+            
+            if not is_valid:
+                last_error = {
+                    "error": "Ollama response validation failed",
+                    "message": f"Invalid format: {'; '.join(validation_errors[:3])}"
+                }
+                logger.warning(f"⚠️ Attempt {attempt} failed: Validation error")
+                if attempt < max_retries:
+                    wait_time = attempt * 5
+                    logger.info(f"⏳ Waiting {wait_time}s before retry...")
+                    time.sleep(wait_time)
+                continue
+                
+            # Success!
+            logger.info(f"✅ Ollama succeeded on attempt {attempt}")
+            parsed_result["source"] = f"ollama-{model}"
+            parsed_result["attempts"] = attempt
+            return parsed_result
+            
+        except requests.exceptions.Timeout:
+            last_error = {
+                "error": "Ollama timeout",
+                "message": f"Request timed out after 300s (attempt {attempt}/{max_retries})"
+            }
+            logger.warning(f"⚠️ Attempt {attempt} timed out")
+            if attempt < max_retries:
+                wait_time = attempt * 10  # Longer wait for timeouts
+                logger.info(f"⏳ Waiting {wait_time}s before retry...")
+                time.sleep(wait_time)
+                
+        except requests.exceptions.ConnectionError:
+            last_error = {
+                "error": "Ollama unreachable",
+                "message": f"Could not connect to Ollama at {base_url}. Is it running?"
+            }
+            logger.error(f"❌ Cannot connect to Ollama - not retrying")
+            break  # Don't retry connection errors
+            
+        except Exception as e:
+            last_error = {
+                "error": "Ollama error",
+                "message": f"Error communicating with Ollama: {str(e)}"
+            }
+            logger.error(f"❌ Unexpected error: {str(e)}")
+            if attempt < max_retries:
+                time.sleep(attempt * 5)
+    
+    # All retries failed
+    logger.error(f"❌ All {max_retries} attempts failed")
+    if last_error:
+        last_error["attempts"] = max_retries
+    return last_error or {"error": "Unknown error", "message": "All retry attempts failed"}
+
+
+
 def get_career_recommendations(user_input: dict, use_mock: bool = False) -> dict:
     """
     Main function to get career recommendations - REAL AI ONLY, NO MOCKS
     """
+    logger.info(f"🚀 Starting recommendation request for user: {user_input.get('name', 'Unknown')}")
     
     # Check environment variable for demo mode
-    import os
     if os.getenv('USE_MOCK_AI', 'false').lower() == 'true':
         use_mock = True
+        logger.info("📌 Mock mode enabled via USE_MOCK_AI environment variable")
     
     # Check cache first to avoid duplicate API calls
-    import time
     cache_key = _get_cache_key(user_input)
     if cache_key in _response_cache:
         cached_data, cache_time = _response_cache[cache_key]
         if time.time() - cache_time < _cache_timeout:
-            print(f"✅ Returning cached response (saved API quota!)")
+            logger.info(f"✅ Cache HIT - Returning cached response (saved API quota!)")
             return cached_data
+    logger.debug(f"❌ Cache MISS - Will call AI provider")
     
     disclaimer = (
         "These are AI-generated suggestions based on Delhi market data and your profile. "
@@ -270,14 +389,48 @@ def get_career_recommendations(user_input: dict, use_mock: bool = False) -> dict
         result["demo_mode"] = True
         return result
     
+    # Determine provider
+    ai_provider = getattr(settings, 'AI_PROVIDER', 'gemini').lower()
+    logger.info(f"🎯 Selected AI provider: {ai_provider}")
+    
     # Check if AI is available
-    if not GEMINI_AVAILABLE:
+    if ai_provider == 'gemini' and not GEMINI_AVAILABLE:
         return {
             "error": "AI service unavailable",
             "message": "The Gemini AI package is not installed. Please install google-genai package.",
             "user_name": user_input.get('name', 'User')
         }
-    
+        
+    if ai_provider == 'ollama':
+        ollama_model = getattr(settings, 'OLLAMA_MODEL', 'mistral')
+        logger.info(f"🦙 Using Ollama with model: {ollama_model}")
+        
+        market_data = load_delhi_market_data()
+        language = user_input.get('preferred_language', 'english')
+        
+        # Simplify prompt slightly for Ollama if needed, but standard one works well with decent models
+        prompt = build_prompt(user_input, market_data, language)
+        logger.debug(f"Prompt length: {len(prompt)} characters")
+        
+        start_time = time.time()
+        result = get_ollama_recommendations(user_input, prompt)
+        elapsed = time.time() - start_time
+        
+        if "error" not in result:
+            logger.info(f"✅ Ollama response received in {elapsed:.2f}s")
+            result["user_name"] = user_input.get('name', 'User')
+            result["preferred_language"] = language
+            result["disclaimer"] = disclaimer
+            
+            # Cache the successful result
+            _response_cache[cache_key] = (result, time.time())
+            logger.debug("Response cached successfully")
+        else:
+            logger.error(f"❌ Ollama error after {elapsed:.2f}s: {result.get('error')}")
+            
+        return result
+
+    # Default to Gemini logic if not ollama
     api_key = settings.GEMINI_API_KEY
     if not api_key:
         return {
@@ -634,4 +787,3 @@ def get_mock_recommendations(user_input: dict) -> dict:
         "recommendations": recommendations,
         "source": "mock-fallback"  # Indicates mock data, not real AI
     }
-
