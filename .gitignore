@@ -19,6 +19,7 @@ __pycache__/
 venv/
 .env/
 .venv/
+.del/
 
 ############################
 # Node / React / Vite
@@ -52,3 +53,11 @@ pnpm-debug.log*
 .cache/
 temp/
 tmp/
+
+# Auxly - AI Task Management (internal data)
+.auxly/
+
+# Security & Local Dev
+.env
+*.sqlite3
+.agent/

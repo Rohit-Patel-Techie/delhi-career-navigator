@@ -510,7 +510,6 @@ def get_career_recommendations(user_input: dict, use_mock: bool = False) -> dict
             result["source"] = "gemini-ai"  # Real AI generation
             
             # Cache the successful result
-            import time
             _response_cache[cache_key] = (result, time.time())
         
         return result
@@ -644,9 +643,179 @@ def get_mock_recommendations(user_input: dict) -> dict:
             "time_commitment": "flexible",
             "training_cost": "low",
             "keywords": ["design", "graphics", "creative", "visual", "art", "photoshop", "illustrator", "branding"]
+        },
+        "junior_legal_associate": {
+            "pathway_name": "Junior Legal Associate / Litigation Assistant",
+            "description": "Assist senior advocates and law firms with legal research, case preparation, drafting petitions, and attending court proceedings.",
+            "required_skills": [
+                "Legal Research",
+                "Drafting & Pleadings",
+                "Case Analysis",
+                "Court Procedure Knowledge",
+                "Communication"
+            ],
+            "estimated_salary": "₹3-6 LPA",
+            "estimated_salary_budget": "₹2-4 LPA (entry-level chambers)",
+            "growth_prospects": "Strong long-term growth in Delhi NCR with experience, specialization, and networking",
+            "time_commitment": "high",
+            "training_cost": "very_low",
+            "keywords": [
+                "law",
+                "litigation",
+                "advocate",
+                "court",
+                "legal associate",
+                "pleadings",
+                "case law",
+                "ba llb",
+                "llb"
+            ]
+        },
+        "policy_research_analyst": {
+            "pathway_name": "Policy Research & Think Tank Analyst",
+            "description": "Research laws, public policies, and social issues for think tanks, NGOs, government-linked institutions, and research organizations.",
+            "required_skills": [
+                "Policy Analysis",
+                "Research Methodology",
+                "Legal Writing",
+                "Critical Thinking",
+                "Data Interpretation"
+            ],
+            "estimated_salary": "₹4-7 LPA",
+            "estimated_salary_budget": "₹3-5 LPA (research roles, NGOs)",
+            "growth_prospects": "Steady growth with specialization in public policy, governance, or regulatory affairs",
+            "time_commitment": "medium",
+            "training_cost": "low",
+            "keywords": [
+                "policy",
+                "research",
+                "think tank",
+                "public policy",
+                "governance",
+                "law",
+                "analysis",
+                "ba llb",
+                "llb",
+                "ngo"
+            ]
+        },
+        "digital_marketer": {
+            "pathway_name": "Digital Marketer",
+            "description": "Manage online marketing campaigns, SEO, social media, and email marketing.",
+            "required_skills": ["SEO", "Social Media", "Analytics", "Content Marketing", "Email Marketing"],
+            "estimated_salary": "₹3-8 LPA",
+            "estimated_salary_budget": "₹2-5 LPA (entry-level)",
+            "growth_prospects": "Good - Digital marketing is always in demand",
+            "time_commitment": "flexible",
+            "training_cost": "very_low",
+            "keywords": ["marketing", "digital", "online", "social media", "seo", "analytics", "content marketing", "email marketing"]
+        },
+        "content_writer": {
+            "pathway_name": "Content Writer",
+            "description": "Create engaging and informative content for websites, blogs, social media, and marketing materials.",
+            "required_skills": ["Writing", "SEO", "Content Strategy", "Editing", "Research"],
+            "estimated_salary": "₹3-8 LPA",
+            "estimated_salary_budget": "₹2-5 LPA (entry-level)",
+            "growth_prospects": "Good - Content is always in demand",
+            "time_commitment": "flexible",
+            "training_cost": "very_low",
+            "keywords": ["writing", "content", "creative", "communication", "english", "journalism", "media", "blogging"]
+        },
+        "social_media_manager": {
+            "pathway_name": "Social Media Manager",
+            "description": "Manage social media accounts, create content, and engage with followers.",
+            "required_skills": ["Social Media", "Content Creation", "Analytics", "Engagement", "Content Strategy"],
+            "estimated_salary": "₹3-8 LPA",
+            "estimated_salary_budget": "₹2-5 LPA (entry-level)",
+            "growth_prospects": "Good - Social media is always in demand",
+            "time_commitment": "flexible",
+            "training_cost": "very_low",
+            "keywords": ["social media", "management", "engagement", "content", "analytics", "strategy", "marketing", "digital"]
+        },
+        "legal_content_compliance": {
+            "pathway_name": "Legal Content & Compliance Specialist",
+            "description": "Work on drafting legal documents, compliance policies, contracts, and regulatory content for corporates, startups, and legal-tech companies.",
+            "required_skills": [
+                "Legal Research",
+                "Legal Drafting",
+                "Compliance Knowledge",
+                "Attention to Detail",
+                "Written Communication"
+            ],
+            "estimated_salary": "₹4-8 LPA",
+            "estimated_salary_budget": "₹3-6 LPA (entry-level, corporates/startups)",
+            "growth_prospects": "Good - Increasing demand in Delhi NCR due to startup growth, compliance needs, and legal-tech expansion",
+            "time_commitment": "medium",
+            "training_cost": "very_low",
+            "keywords": [
+                "law",
+                "legal",
+                "compliance",
+                "contracts",
+                "corporate law",
+                "documentation",
+                "policy",
+                "ba llb",
+                "llb",
+                "non-tech"
+            ]
+        },
+        "junior_legal_associate": {
+            "pathway_name": "Junior Legal Associate / Litigation Assistant",
+            "description": "Assist senior advocates and law firms with legal research, case preparation, drafting petitions, and attending court proceedings.",
+            "required_skills": [
+                "Legal Research",
+                "Drafting & Pleadings",
+                "Case Analysis",
+                "Court Procedure Knowledge",
+                "Communication"
+            ],
+            "estimated_salary": "₹3-6 LPA",
+            "estimated_salary_budget": "₹2-4 LPA (entry-level chambers)",
+            "growth_prospects": "Strong long-term growth in Delhi NCR with experience, specialization, and networking",
+            "time_commitment": "high",
+            "training_cost": "very_low",
+            "keywords": [
+                "law",
+                "litigation",
+                "advocate",
+                "court",
+                "legal associate",
+                "pleadings",
+                "case law",
+                "ba llb",
+                "llb"
+            ]
+        },
+        "policy_research_analyst": {
+            "pathway_name": "Policy Research & Think Tank Analyst",
+            "description": "Research laws, public policies, and social issues for think tanks, NGOs, government-linked institutions, and research organizations.",
+            "required_skills": [
+                "Policy Analysis",
+                "Research Methodology",
+                "Legal Writing",
+                "Critical Thinking",
+                "Data Interpretation"
+            ],
+            "estimated_salary": "₹4-7 LPA",
+            "estimated_salary_budget": "₹3-5 LPA (research roles, NGOs)",
+            "growth_prospects": "Steady growth with specialization in public policy, governance, or regulatory affairs",
+            "time_commitment": "medium",
+            "training_cost": "low",
+            "keywords": [
+                "policy",
+                "research",
+                "think tank",
+                "public policy",
+                "governance",
+                "law",
+                "analysis",
+                "ba llb",
+                "llb",
+                "ngo"
+            ]
         }
     }
-    
     # Score each pathway based on user input
     pathway_scores = {}
     for key, pathway in pathways.items():
