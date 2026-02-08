@@ -561,6 +561,12 @@ def get_mock_recommendations(user_input: dict) -> dict:
     course_stream = user_input.get('course_stream', '').lower()
     covered_skills = user_input.get('covered_skills', '').lower()
     career_inclination = user_input.get('career_inclination', '').lower()
+    
+    # Normalize course stream for better matching
+    is_arts = any(x in course_stream for x in ['ba', 'b.a', 'arts', 'humanities', 'social'])
+    is_commerce = any(x in course_stream for x in ['b.com', 'bcom', 'commerce', 'bba', 'ca', 'finance'])
+    is_science = any(x in course_stream for x in ['b.sc', 'bsc', 'science', 'medical'])
+    is_tech = any(x in course_stream for x in ['b.tech', 'btech', 'bca', 'mca', 'cs', 'it', 'engineering'])
     time_availability = user_input.get('time_availability', '').lower()
     financial_constraint = user_input.get('financial_constraint', False)
     preferred_language = user_input.get('preferred_language', 'english')
@@ -598,7 +604,62 @@ def get_mock_recommendations(user_input: dict) -> dict:
             "growth_prospects": "Good - Digital transformation is accelerating across industries",
             "time_commitment": "medium",
             "training_cost": "very_low",
-            "keywords": ["marketing", "social media", "seo", "content", "creative", "advertising", "campaigns", "communication"]
+            "keywords": ["marketing", "social media", "seo", "content", "creative", "advertising", "campaigns", "communication", "bba", "b.com", "ba", "any degree"]
+        },
+        "human_resources": {
+            "pathway_name": "HR Specialist / Recruiter",
+            "description": "Manage talent acquisition, employee relations, and organizational culture for companies.",
+            "required_skills": ["Communication", "Interpersonal Skills", "Screening", "LinkedIn", "Management"],
+            "estimated_salary": "₹3-7 LPA",
+            "estimated_salary_budget": "₹2.5-5 LPA (entry-level)",
+            "growth_prospects": "Stable - Every growing company needs an HR team",
+            "time_commitment": "medium",
+            "training_cost": "low",
+            "keywords": ["hr", "human resources", "recruitment", "people", "management", "mba", "bba", "ba", "psychology", "social work"]
+        },
+        "sales_business_dev": {
+            "pathway_name": "Sales & Business Development",
+            "description": "Drive business growth by identifying new opportunities and building client relationships.",
+            "required_skills": ["Sales", "Communication", "Negotiation", "Lead Generation", "CRM"],
+            "estimated_salary": "₹4-10 LPA (plus incentives)",
+            "estimated_salary_budget": "₹3-6 LPA (base + commission)",
+            "growth_prospects": "High - Sales roles are always in demand and offer high earning potential via commissions",
+            "time_commitment": "high",
+            "training_cost": "very_low",
+            "keywords": ["sales", "business development", "bde", "marketing", "growth", "revenue", "bba", "b.com", "ba", "mba", "any degree"]
+        },
+        "teaching_education": {
+            "pathway_name": "Teacher / EdTech Educator",
+            "description": "Teach students in schools, coaching centers, or online platforms.",
+            "required_skills": ["Subject Mastery", "Communication", "Patience", "Presentation", "Mentoring"],
+            "estimated_salary": "₹3-8 LPA",
+            "estimated_salary_budget": "₹2.5-6 LPA",
+            "growth_prospects": "Steady - EdTech is booming in India, and good teachers are always needed",
+            "time_commitment": "medium",
+            "training_cost": "medium",
+            "keywords": ["teaching", "education", "tutor", "school", "academic", "b.ed", "ma", "m.sc", "ba", "b.sc", "research"]
+        },
+        "event_management": {
+            "pathway_name": "Event Management",
+            "description": "Plan and execute corporate events, weddings, and conferences.",
+            "required_skills": ["Planning", "Coordination", "Vendor Management", "Creativity", "Teamwork"],
+            "estimated_salary": "₹3-8 LPA",
+            "estimated_salary_budget": "₹2.5-5 LPA",
+            "growth_prospects": "Good - Events industry is bouncing back strong",
+            "time_commitment": "flexible",
+            "training_cost": "low",
+            "keywords": ["event", "management", "wedding", "corporate", "planning", "creative", "mass comm", "ba"]
+        },
+        "banking_operations": {
+            "pathway_name": "Banking Operations Executive",
+            "description": "Handle day-to-day banking transactions, customer queries, and operational processes.",
+            "required_skills": ["Banking Knowledge", "Customer Service", "Attention to Detail", "Computer Proficiency", "Finance"],
+            "estimated_salary": "₹3.5-7 LPA",
+            "estimated_salary_budget": "₹3-5 LPA",
+            "growth_prospects": "Stable - Banking sector is huge and organized",
+            "time_commitment": "medium",
+            "training_cost": "low",
+            "keywords": ["banking", "finance", "operations", "bank", "b.com", "commerce", "economics", "maths"]
         },
         "ui_ux_designer": {
             "pathway_name": "UI/UX Designer",
@@ -620,7 +681,8 @@ def get_mock_recommendations(user_input: dict) -> dict:
             "growth_prospects": "Very Good - Essential role in all growing companies",
             "time_commitment": "medium",
             "training_cost": "very_low",
-            "keywords": ["business", "analyst", "consulting", "management", "strategy", "process", "bba", "mba", "commerce"]
+            "training_cost": "very_low",
+            "keywords": ["business", "analyst", "consulting", "management", "strategy", "process", "bba", "mba", "commerce", "b.com", "economics"]
         },
         "content_writer": {
             "pathway_name": "Content Writer/Creator",
@@ -631,7 +693,7 @@ def get_mock_recommendations(user_input: dict) -> dict:
             "growth_prospects": "Good - Content is key for digital presence",
             "time_commitment": "flexible",
             "training_cost": "very_low",
-            "keywords": ["writing", "content", "creative", "communication", "english", "journalism", "media", "blogging"]
+            "keywords": ["writing", "content", "creative", "communication", "english", "journalism", "media", "blogging", "ba", "arts", "mass comm", "literature"]
         },
         "graphic_designer": {
             "pathway_name": "Graphic Designer",
@@ -642,7 +704,8 @@ def get_mock_recommendations(user_input: dict) -> dict:
             "growth_prospects": "Good - Visual content in high demand",
             "time_commitment": "flexible",
             "training_cost": "low",
-            "keywords": ["design", "graphics", "creative", "visual", "art", "photoshop", "illustrator", "branding"]
+            "training_cost": "low",
+            "keywords": ["design", "graphics", "creative", "visual", "art", "photoshop", "illustrator", "branding", "fine arts", "ba"]
         },
         "junior_legal_associate": {
             "pathway_name": "Junior Legal Associate / Litigation Assistant",
@@ -696,31 +759,14 @@ def get_mock_recommendations(user_input: dict) -> dict:
                 "analysis",
                 "ba llb",
                 "llb",
-                "ngo"
+                "ngo",
+                "political science",
+                "sociology",
+                "ba",
+                "arts"
             ]
         },
-        "digital_marketer": {
-            "pathway_name": "Digital Marketer",
-            "description": "Manage online marketing campaigns, SEO, social media, and email marketing.",
-            "required_skills": ["SEO", "Social Media", "Analytics", "Content Marketing", "Email Marketing"],
-            "estimated_salary": "₹3-8 LPA",
-            "estimated_salary_budget": "₹2-5 LPA (entry-level)",
-            "growth_prospects": "Good - Digital marketing is always in demand",
-            "time_commitment": "flexible",
-            "training_cost": "very_low",
-            "keywords": ["marketing", "digital", "online", "social media", "seo", "analytics", "content marketing", "email marketing"]
-        },
-        "content_writer": {
-            "pathway_name": "Content Writer",
-            "description": "Create engaging and informative content for websites, blogs, social media, and marketing materials.",
-            "required_skills": ["Writing", "SEO", "Content Strategy", "Editing", "Research"],
-            "estimated_salary": "₹3-8 LPA",
-            "estimated_salary_budget": "₹2-5 LPA (entry-level)",
-            "growth_prospects": "Good - Content is always in demand",
-            "time_commitment": "flexible",
-            "training_cost": "very_low",
-            "keywords": ["writing", "content", "creative", "communication", "english", "journalism", "media", "blogging"]
-        },
+
         "social_media_manager": {
             "pathway_name": "Social Media Manager",
             "description": "Manage social media accounts, create content, and engage with followers.",
@@ -760,61 +806,7 @@ def get_mock_recommendations(user_input: dict) -> dict:
                 "non-tech"
             ]
         },
-        "junior_legal_associate": {
-            "pathway_name": "Junior Legal Associate / Litigation Assistant",
-            "description": "Assist senior advocates and law firms with legal research, case preparation, drafting petitions, and attending court proceedings.",
-            "required_skills": [
-                "Legal Research",
-                "Drafting & Pleadings",
-                "Case Analysis",
-                "Court Procedure Knowledge",
-                "Communication"
-            ],
-            "estimated_salary": "₹3-6 LPA",
-            "estimated_salary_budget": "₹2-4 LPA (entry-level chambers)",
-            "growth_prospects": "Strong long-term growth in Delhi NCR with experience, specialization, and networking",
-            "time_commitment": "high",
-            "training_cost": "very_low",
-            "keywords": [
-                "law",
-                "litigation",
-                "advocate",
-                "court",
-                "legal associate",
-                "pleadings",
-                "case law",
-                "ba llb",
-                "llb"
-            ]
-        },
-        "policy_research_analyst": {
-            "pathway_name": "Policy Research & Think Tank Analyst",
-            "description": "Research laws, public policies, and social issues for think tanks, NGOs, government-linked institutions, and research organizations.",
-            "required_skills": [
-                "Policy Analysis",
-                "Research Methodology",
-                "Legal Writing",
-                "Critical Thinking",
-                "Data Interpretation"
-            ],
-            "estimated_salary": "₹4-7 LPA",
-            "estimated_salary_budget": "₹3-5 LPA (research roles, NGOs)",
-            "growth_prospects": "Steady growth with specialization in public policy, governance, or regulatory affairs",
-            "time_commitment": "medium",
-            "training_cost": "low",
-            "keywords": [
-                "policy",
-                "research",
-                "think tank",
-                "public policy",
-                "governance",
-                "law",
-                "analysis",
-                "ba llb",
-                "llb",
-                "ngo"
-            ]
-        }
+
     }
     # Score each pathway based on user input
     pathway_scores = {}
@@ -826,6 +818,23 @@ def get_mock_recommendations(user_input: dict) -> dict:
         for keyword in pathway["keywords"]:
             if keyword in combined_text:
                 score += 2
+        
+        # Boost based on Course Stream Type
+        if is_arts:
+             if any(k in ["ba", "arts", "humanities", "social", "writing", "design", "law", "policy", "teaching", "psychology"] for k in pathway["keywords"]):
+                 score += 3
+        
+        if is_commerce:
+             if any(k in ["b.com", "commerce", "business", "finance", "marketing", "sales", "management", "economics"] for k in pathway["keywords"]):
+                 score += 3
+        
+        if is_science:
+             if any(k in ["b.sc", "science", "research", "data", "analytics", "teaching"] for k in pathway["keywords"]):
+                 score += 3
+        
+        if is_tech:
+             if any(k in ["tech", "it", "coding", "software", "development", "data", "engineering"] for k in pathway["keywords"]):
+                 score += 3
         
         # Bonus for financial constraints - prefer lower training cost
         if financial_constraint:
@@ -849,9 +858,19 @@ def get_mock_recommendations(user_input: dict) -> dict:
     # Get top 3 pathways
     top_pathways = sorted(pathway_scores.items(), key=lambda x: x[1], reverse=True)[:3]
     
-    # If all scores are 0 (no matches), use default recommendations
+    # If all scores are 0 (no matches), use SMART default recommendations based on stream
     if top_pathways[0][1] == 0:
-        top_pathways = [("software_developer", 0), ("data_analyst", 0), ("digital_marketing", 0)]
+        if is_arts:
+             top_pathways = [("content_writer", 1), ("digital_marketing", 1), ("teaching_education", 1)]
+        elif is_commerce:
+             top_pathways = [("business_analyst", 1), ("sales_business_dev", 1), ("digital_marketing", 1)]
+        elif is_science:
+             top_pathways = [("data_analyst", 1), ("teaching_education", 1), ("digital_marketing", 1)]
+        elif is_tech:
+             top_pathways = [("software_developer", 1), ("data_analyst", 1), ("ui_ux_designer", 1)]
+        else:
+             # Generic fallback for unknown streams
+             top_pathways = [("digital_marketing", 0), ("sales_business_dev", 0), ("content_writer", 0)]
     
     # Build recommendations
     recommendations = []

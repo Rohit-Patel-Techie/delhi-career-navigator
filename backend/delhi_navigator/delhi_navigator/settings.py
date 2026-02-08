@@ -13,15 +13,23 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 import os
 
-# Try to load dotenv if available
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    pass  # dotenv not installed, environment variables should be set manually
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Try to load dotenv if available - use explicit path for Windows compatibility
+try:
+    from dotenv import load_dotenv
+    # Explicitly specify .env file path (works on both Windows and Linux)
+    env_path = BASE_DIR / '.env'
+    if env_path.exists():
+        load_dotenv(dotenv_path=env_path, encoding='utf-8')
+        print(f"✅ Loaded .env from: {env_path}")
+    else:
+        print(f"⚠️ .env file not found at: {env_path}")
+        # Try loading from default location as fallback
+        load_dotenv()
+except ImportError:
+    pass  # dotenv not installed, environment variables should be set manually
 
 
 # Quick-start development settings - unsuitable for production
